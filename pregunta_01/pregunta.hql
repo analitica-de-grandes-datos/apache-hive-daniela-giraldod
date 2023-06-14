@@ -15,18 +15,14 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
 */
 
 DROP TABLE IF EXISTS datos;
-DROP TABLE IF EXISTS counter;
-
 
 CREATE TABLE datos (letra STRING,dates DATE,number INT)
 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 
 LOAD DATA LOCAL INPATH "data.tsv" OVERWRITE INTO TABLE datos;
-INSERT OVERWRITE DIRECTORY 'output'
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 
-SELECT SUBSTR(letra, 1, 1) AS letra, COUNT(*) AS cantidad
+SELECT letra, COUNT(letra) AS cantidad
 FROM datos
-GROUP BY SUBSTR(letra, 1, 1)
-ORDER BY letra;
+GROUP BY letra;
+

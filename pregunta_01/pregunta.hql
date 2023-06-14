@@ -18,11 +18,8 @@ DROP TABLE IF EXISTS data;
 DROP TABLE IF EXISTS counter;
 
 
-CREATE TABLE datos (
- letra STRING,
-        dates DATE,
-        number INT
-)
+CREATE TABLE datos (letra STRING,dates DATE,number INT)
+
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 TBLPROPERTIES ("skip.header.line.count"="0");
 LOAD DATA LOCAL INPATH "data.tsv" OVERWRITE INTO TABLE datos;

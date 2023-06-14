@@ -14,14 +14,14 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
-DROP TABLE IF EXISTS data;
+DROP TABLE IF EXISTS datos;
 DROP TABLE IF EXISTS counter;
 
 
 CREATE TABLE datos (letra STRING,dates DATE,number INT)
 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
-TBLPROPERTIES ("skip.header.line.count"="0");
+
 LOAD DATA LOCAL INPATH "data.tsv" OVERWRITE INTO TABLE datos;
 
 SELECT SUBSTR(letra, 1, 1) AS letra, COUNT(*) AS cantidad

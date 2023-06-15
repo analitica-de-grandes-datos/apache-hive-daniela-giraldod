@@ -46,3 +46,15 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+DROP TABLE IF EXISTS pregunta;
+CREATE TABLE pregunta 
+AS 
+
+        SELECT UPPER(c5) AS letras
+        FROM tbl0 
+        LATERAL VIEW EXPLODE(c5) tbl0 AS letras;
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT letras
+FROM pregunta;

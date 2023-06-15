@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS pregunta;
 CREATE TABLE pregunta 
 AS 
 
-        SELECT UPPER(c5) 
+        SELECT UPPER(CONCAT_WS(':',c5)) 
         FROM tbl0 
         LATERAL VIEW EXPLODE(c5) tbl0 AS letras;
 

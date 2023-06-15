@@ -51,8 +51,7 @@ CREATE TABLE pregunta
 AS 
 
         SELECT UPPER(CONCAT_WS(':',c5)) 
-        FROM tbl0 
-        LATERAL VIEW EXPLODE(c5) tbl0 AS letras;
+        FROM tbl0;
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','

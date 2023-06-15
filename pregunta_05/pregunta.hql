@@ -45,3 +45,17 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+
+DROP TABLE IF EXISTS pregunta;
+CREATE TABLE pregunta 
+AS 
+        SELECT DISTINCT letter 
+        FROM tbl0 
+        LATERAL VIEW EXPLODE(c5) tbl0 AS letter;
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT *
+FROM pregunta
+GROUP BY letter;
+

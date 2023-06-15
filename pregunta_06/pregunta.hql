@@ -50,11 +50,11 @@ DROP TABLE IF EXISTS pregunta;
 CREATE TABLE pregunta 
 AS 
 
-        SELECT UPPER(c5) AS letras
+        SELECT UPPER(c5) 
         FROM tbl0 
         LATERAL VIEW EXPLODE(c5) tbl0 AS letras;
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT letras
+SELECT *
 FROM pregunta;

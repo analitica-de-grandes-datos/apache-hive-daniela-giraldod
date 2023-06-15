@@ -49,13 +49,16 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 DROP TABLE IF EXISTS pregunta;
 CREATE TABLE pregunta 
 AS 
-        SELECT YEAR(c4) AS dates, letter
+        SELECT YEAR(c4) AS dates, 
+        letter
         FROM tbl0 
         LATERAL VIEW EXPLODE(c5) tbl0 AS letter;
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT dates,letter,COUNT(1)
+SELECT dates,
+letter,
+COUNT(1)
 FROM pregunta
 GROUP BY dates, letter;
 ORDER BY dates, letter;

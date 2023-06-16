@@ -46,3 +46,15 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+DROP TABLE IF EXISTS pregunta;
+CREATE TABLE pregunta
+AS
+
+        SELECT c2, concat_ws(':', collect_list(STRING(c1))) AS cv
+        FROM tbl
+        GROUP BY c2;
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT *
+FROM pregunta;

@@ -51,7 +51,7 @@ CREATE TABLE pregunta
 AS
 
         SELECT c2, concat_ws(':', collect_list(STRING(c1))) AS cv
-        FROM tbl
+        FROM tbl0
         GROUP BY c2;
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'

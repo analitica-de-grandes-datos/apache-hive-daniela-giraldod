@@ -49,10 +49,8 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 INSERT OVERWRITE LOCAL DIRECTORY './output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 
-SELECT t0.c1, t0.c2, t1.val
-FROM tbl0 t0 JOIN (
-    SELECT t1.c1, key, val
-    FROM tbl1 t1
-    LATERAL VIEW EXPLODE(t1.c4) et AS key, val
-) t1
-ON (t0.c1 = t1.c1 AND t0.c2 = t1.key);
+SELECT c2, SUM(clave2)
+FROM tbl0
+LATERAL VIEW
+explode(c6) tabla2 AS clave1, clave2
+GROUP BY c2;

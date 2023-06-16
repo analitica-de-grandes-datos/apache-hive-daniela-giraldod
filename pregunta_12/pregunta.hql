@@ -33,10 +33,12 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
-INSERT OVERWRITE LOCAL DIRECTORY 'output'
+INSERT OVERWRITE LOCAL DIRECTORY 'output/'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT t1.valor, t2.key, count(*)
+SELECT letras, claves, COUNT(letras)
 FROM t0
-LATERAL VIEW EXPLODE(t0.c2) t1 AS valor
-LATERAL VIEW EXPLODE(t0.c3) t2 AS key, cha
-GROUP BY t1.valor, t2.key;
+LATERAL VIEW
+explode(c2) t2 AS letras
+LATERAL VIEW
+explode(c3) t3 AS claves, claves2
+GROUP BY letras, claves; 

@@ -39,4 +39,4 @@ SELECT t1.valor, t2.key, count(*)
 FROM t0
 LATERAL VIEW EXPLODE(t0.c2) t1 AS valor
 LATERAL VIEW EXPLODE(t0.c3) t2 AS key, x
-GROUP BY t1.val, t2.key;
+GROUP BY t1.valor, t2.key;

@@ -46,14 +46,12 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-DROP TABLE IF EXISTS pregunta;
-CREATE TABLE pregunta
-AS
-
-        SELECT c2, SUM(suma)
-        FROM tbl0
-        LATERAL VIEW EXPLODE(MAP_VALUES(c6)) et AS suma
-        GROUP BY c2;
-
 INSERT OVERWRITE LOCAL DIRECTORY './output'
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+
+SELECT c2, SUM(suma)
+FROM tbl0
+LATERAL VIEW EXPLODE(MAP_VALUES(c6)) et AS suma
+GROUP BY c2;
+
+
